@@ -1,0 +1,248 @@
+<!--
+================================
+Coder: Emily Yu 
+Date: 01/21/2019 - 01/28/2019
+
+Description: 
+Objective for this exercise is to utilize 
+the localStorage object and learn how to 
+store and retrieve the data stored within.
+
+LocalStorage is different from SessionStorage 
+in that the data is still there even after 
+the user has closed the browser.
+
+Additional modifications include:
+-have four field entries instead of the current two
+-one field should be text entry
+-change the theme colors
+-ask for donut items instead of the current weather items
+-include at least one image related to the donut theme
+
+Fun stuff I included:
+After clicking the "Save Wishlist" button, 
+instead of displaying the output, users will see two buttons as options.
+One where once clicked will clear the donut form, 
+and the other where once clicked will display the output.
+====================================
+-->
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Exercise #4 - localStorage</title>
+<link href="reset.css" type="text/css" rel="stylesheet" />
+<link href="webStorage_Style.css" type="text/css" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css?family=Nanum+Pen+Script" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Permanent+Marker" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Berkshire+Swash" rel="stylesheet">
+<script>
+window.addEventListener("load",init);
+
+function init(){
+	if(typeof(Storage)!=="undefined"){
+	
+	display();
+	
+
+	}
+	
+	else{
+	//old bowser	
+	}
+}
+
+function saveInfo(){
+    let type = document.querySelector(".type:checked").value; //locate the value that is checked by the user
+    let quantity = document.getElementById("quantity").value;
+    let name = document.getElementById("name").value;
+    
+    /*STEPS for STORING MULTIPLE ENTRIES from CHECKBOX:
+        1. an array is created
+        2. locate the checkbox element
+        3. loop through all the values to see which ones are checked
+        4. if the boxes are checked by the user, push the value to the created array
+        5. to store the array as a localStorageable item (a string), we join the values within as a string
+        (another way to do this would be JSON.stringify and later JSON.parse)
+    */
+    let toppings = [];
+    let e = document.getElementsByName("extras[]");    
+    for(let i=0; i < e.length; i++){
+        if(e[i].checked){
+            toppings.push(e[i].value);
+        }
+    }
+    let extras = toppings.join(", ");
+
+    //setItem as a key and value
+    localStorage.setItem("donutType", type);
+    localStorage.setItem("donutExtras", extras);
+	localStorage.setItem("donutQuantity", quantity);
+	localStorage.setItem("donutName", name);
+	
+	display();	
+}
+
+function display(){
+    let rightBox = document.getElementById("useroutput");
+    //use the localStorage key to locate the value
+    let DName = localStorage.getItem("donutName");
+    let DQuantity= localStorage.getItem("donutQuantity");
+    let DType = localStorage.getItem("donutType");
+    let DExtras = localStorage.getItem("donutExtras");    
+
+    if(DName == undefined){
+		document.getElementById("useroutput").innerHTML=""; //in case it gives an undefined error
+	}
+	else{ document.getElementById("useroutput").innerHTML="<h2>MY DONUT WISHLIST</h2><br><br><p>Quantity: " + DQuantity +"</p><p>Name: " + DName + "</p><p>Type: " + DType + "</p><p>Extras: " + DExtras + "</p>";
+	}
+	
+}
+
+</script>
+
+
+
+</head>
+
+<body>
+
+<div id="main">
+	<section id="userinput">
+    <h1>Donut Wish List</h1>
+    <p>Create my donut wishlist so that I can make them one day.</p>
+    <form>
+    <fieldset>
+        <legend>
+            Donut Details
+        </legend>
+        <fieldset>
+            <legend>Donut Type: </legend>
+            <input class="type" type="radio" name="type" id="cake" value="Cake Donut" checked>
+            <label for="cake">Cake Donut</label>
+            <input class="type" type="radio" name="type" id="twist" value="Twist">
+            <label for="twist">Twist</label>
+            <input class="type" type="radio" name="type" id="cruller" value="French Cruller">
+            <label for="cruller">French Cruller</label>
+            <input class="type" type="radio" name="type" id="long_john" value="Long John">
+            <label for="long_john">Long John</label>
+            <input class="type" type="radio" name="type" id="fritter" value="Apple Fritter">
+            <label for="fritter">Apple Fritter</label>
+            <input class="type" type="radio" name="type" id="holes" value="Donut Holes">
+            <label for="holes">Donut Holes</label>
+            <input class="type" type="radio" name="type" id="mini" value="Mini-Donut">
+            <label for="mini">Mini-Donut</label>
+            <input class="type" type="radio" name="type" id="beignet" value="Beignet">
+            <label for="beignet">Beignet</label>            
+        </fieldset>
+        <br>
+        <fieldset>
+            <legend>Donut Extras: </legend>
+            <input class="extras" type="checkbox" name="extras[]" value="Glazed" id="glazed" >
+            <label for="glazed">Glazed</label>
+            <input class="extras" type="checkbox" name="extras[]" value="Cream Filling" id="cream" >
+            <label for="cream">Cream Filling</label>
+            <input class="extras" type="checkbox" name="extras[]" value="Jelly Filling" id="jelly" >
+            <label for="jelly">Jelly Filling</label>
+            <input class="extras" type="checkbox" name="extras[]" value="Boba Filling" id="boba" >
+            <label for="boba">Boba Filling</label>
+            <input class="extras" type="checkbox" name="extras[]" value="Chocolate Frosting" id="choc" >
+            <label for="choc">Chocolate Frosting</label>
+            <input class="extras" type="checkbox" name="extras[]" value="Strawberry Frosting" id="sberry" >
+            <label for="sberry">Strawberry Frosting</label>
+            <input class="extras" type="checkbox" name="extras[]" value="Matcha Frosting" id="matcha" checked>
+            <label for="matcha">Matcha Frosting</label>
+            <input class="extras" type="checkbox" name="extras[]" value="Pumpkin Frosting" id="pumpkin" >
+            <label for="pumpkin">Pumpkin Frosting</label>
+            <input class="extras" type="checkbox" name="extras[]" value="Cinnamon" id="cinnamon" >
+            <label for="cinnamon">Cinnamon</label>
+            <input class="extras" type="checkbox" name="extras[]" value="Sprinkles" id="sprinkles" >
+            <label for="sprinkles">Sprinkles</label>
+            <input class="extras" type="checkbox" name="extras[]" value="M&M's" id="m_m" >
+            <label for="m_m">M and M's</label>
+            <input class="extras" type="checkbox" name="extras[]" value="Gummy Bears" id="gummy_bears" >
+            <label for="gummy_bears">Gummy Bears</label>        
+        </fieldset>
+        <br>
+        <label for="quantity">
+        Quantity: 
+        </label>
+            <select name="quantity" id="quantity">
+            <!-- see javascript below -->    
+            </select>
+        <br>
+        <label for="name">Name: </label>
+        <br><br>
+        <textarea id="name" name="name" minlength="2" maxlength="280" rows="7" cols="40" placeholder="I can give my donut a name up to 280 characters. Challenge myself and make up a story. I'll read it out and know I made it."></textarea>        
+    </fieldset>
+    <fieldset>
+        <legend>Notes</legend>
+        <p>#1. Yes, I want to do multiple frostings and fillings. They'll each be equally shared across or inside the donut. However, I don't think I want both cream fillings and jelly fillings AND boba fillings inside. That's a bit too much.</p>
+        <p>#2. For batches more than 12, I'll need to think how I'll eat it all.</p>
+    </fieldset>
+   
+    </form>
+     <button type="button" id="button">
+        SAVE WISHLIST
+    </button>
+    <button id="reset">
+       Donuts Are Not Good For Me.
+    </button>
+    <button id="donutCare">
+        
+    </button>
+    </section>
+    
+    
+    <section id="useroutput">
+    </section>
+
+</div>
+
+<script>
+/*These functions (besides init) are located here so that 
+the script can run AFTER the elements have been loaded and interacted with.*/
+
+
+/*Because I did not want to check for valid number values for input type = "number" 
+  (E would be a valid input for this field), I decided to display a drop-down menu.
+  Having to code them from 1 to 12 individually would not be efficient, so I had help
+  by using a for loop to create them.*/
+
+let quantityDropDown = document.querySelector("#quantity");
+for( let i = 1; i < 13; i ++){
+    document.querySelector("#quantity").innerHTML += "<option value='" + i + "' id='" + i + "'>" + i +"</option>";
+}
+    
+    
+var button = document.getElementById("button");
+button.addEventListener("click", hideButton)
+
+    
+var reset = document.getElementById("reset");
+reset.addEventListener("click", NoInfo);
+    
+var doNotCare = document.getElementById("donutCare");
+    
+function hideButton(){
+    button.style.display="none";//need to hide/remove the "Save Wishlist" button by changing it to display: none
+    //would need to change display: none to display: inline-block and make the previous hidden elements appear
+    reset.style.display="inline-block"; 
+    doNotCare.style.display="inline-block";
+}
+    
+function NoInfo(){
+    document.querySelector("#userinput").style.display="none"; //would clear away the donut form (but not the output)
+}
+
+if(typeof(Storage) !== "undefined"){
+	doNotCare.addEventListener("click", saveInfo, true);//would only call the saveInfo function if the storage has items
+}else{
+    
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,160 @@
+/*
+================================
+Coder: Emily Yu 
+Date: 01/21/2019 - 01/28/2019
+Related File: webStorage.html
+
+Description: 
+Objective for this exercise is to utilize 
+the localStorage object and learn how to 
+store and retrieve the data stored within.
+
+LocalStorage is different from SessionStorage 
+in that the data is still there even after 
+the user has closed the browser.
+
+Additional modifications include:
+-have four field entries instead of the current two
+-one field should be text entry
+-change the theme colors
+-ask for donut items instead of the current weather items
+-include at least one image related to the donut theme
+
+Fun stuff I included:
+After clicking the "Save Wishlist" button, 
+instead of displaying the output, users will see two buttons as options.
+One where once clicked will clear the donut form, 
+and the other where once clicked will display the output.
+====================================
+*/
+
+@charset "UTF-8";
+/* CSS Document */
+
+body{
+    background-image: url(../img/sprinkles.jpg); /*found on Pinterest*/
+    margin: 10px;
+}
+
+#main{
+width: 90%; height:800px;
+margin:0 auto;	
+}
+
+#userinput{
+	float:left;
+	margin-top:25px;
+	padding:20px;
+	background-color:#f44298;
+	width: 600px; 
+    height: 1010px;
+    font-family: 'Nanum Pen Script', cursive;
+}
+
+h1{
+    font-size: 50px;
+    border-bottom: 1px solid black;
+}
+
+h2{
+    font-size: 75px;
+}
+
+#useroutput{
+	float:left;
+	margin-top: 500px;
+	margin-left:20px;
+	padding: 25px;
+	width: 400px; 
+    height: 510px;
+	background-color: #ba5b89;
+    font-family: 'Berkshire Swash', cursive;
+    font-size: 30px;
+}
+
+button{
+    margin: 20px;
+}
+
+#button{
+    width: 389px;
+    height: 179px;
+    border: 5px solid black;
+    font-weight: 500;
+    font-size: 25px;
+    background-color: #f44298;
+    margin-left: 18%;
+    font-family: 'Permanent Marker', cursive;
+}
+
+#button:hover{
+    background-image: url(../img/grab_donut.jpg);/*found on Unsplash*/
+    background-repeat: no-repeat;
+    background-size: 389px 179px;
+    color: white;
+    font-weight: 700;
+    font-size: 40px;
+    border: none;
+}
+
+fieldset{
+    border: 3px solid black;
+    margin: 8px;
+    padding: 5px;
+}
+
+legend{
+    background-color: black;
+    font-size: 25px;
+    color: white;
+    padding: 10px;
+    font-family: 'Permanent Marker', cursive;
+}
+
+label{
+    margin: 10px;
+    font-size: 20px;
+}
+
+#quantity{
+    margin-bottom: 10px;
+}
+
+textarea{
+    margin-left: 12px;
+    margin-bottom: 10px;
+}
+
+p{
+    padding: 5px;
+    font-size: 20px;
+}
+
+#useroutput>p{
+    border-bottom: 1px solid black;
+}
+
+#reset{
+    /*needs to be hidden when first loaded*/
+    display: none; 
+    background-color: #ff2666;
+    color: white;
+    width: 187.5px;
+    height: 187.5px;
+    font-size: 20px;
+    float: left;
+    border: none;
+    font-weight: bolder;
+}
+
+#donutCare{
+    /*needs to be hidden when first loaded*/
+    display: none;
+    width: 187.5px;
+    height: 187.5px;
+    background-image: url(../img/donut_care.jpg);/*found on Google Search Images*/
+    background-repeat: no-repeat;
+    background-size: 187.5px 187.5px;
+    float: right;
+    border: none;
+}
